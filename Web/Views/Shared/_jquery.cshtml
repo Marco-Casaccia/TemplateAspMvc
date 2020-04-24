@@ -1,0 +1,154 @@
+﻿<script type="text/javascript">
+    function StartLightSearch() {
+        var searchParam = new Object();
+        searchParam.ElementType = 0;
+        searchParam.SearchTerm = $('#ricercaSpotLight').val();
+        StartLoading("Ricerca in corso...");
+        $('#resultsSearch').html("Ricerca in corso");
+        jQuery.ajax({
+            type: "POST",
+            url: '@Url.Action("SearchTreeElements", "Search")',
+            data: searchParam,
+            dataType: "html",
+            success: function (data) {
+                $('#resultsSearch').empty();
+                $('#resultsSearch').html(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                StopLoading();
+                $('#resultsSearch').html('<div class="page-content"><p class="alert alert-danger">Si è verificato un errore:' + xhr.responseText + '</p></div>');
+            },
+            complete: function () {
+                StopLoading();
+            }
+        });
+        return false;
+    }
+    function CollapseWdg(id, closeCreator) {
+        if ($('#' + id + '[class*="collapse"]').attr('id') == undefined) {
+            $('#' + id).addClass('collapse');
+            $('i[name="' + id + '"]').removeClass('fa-chevron-up');
+            $('i[name="' + id + '"]').addClass('fa-chevron-down');
+        } else {
+            $('#' + id).removeClass('collapse');
+            $('i[name="' + id + '"]').removeClass('fa-chevron-down');
+            $('i[name="' + id + '"]').addClass('fa-chevron-up');
+        }
+        if (closeCreator)
+            CollapseWdg('wdgCreate');
+    }
+    function activeVoiceMenu(id, idparent) {
+        alert(id);
+        $('li[id!="' + id + '"]').removeClass('active');
+        $('#id_' + id).addClass('active');
+    }
+    function OpenApplicazione(Id_TreeElement, isInjected) {
+        $('#breadcrumbsHome').hide();
+        StartLoading("Attendere...");
+        var searchParam = new Object();
+        searchParam.Id_TreeElement = Id_TreeElement;
+        searchParam.IsInjected = isInjected;
+        jQuery.ajax({
+            type: "POST",
+            url: '@Url.Action("DetailApplicazione", "Detail")',
+            data: searchParam,
+            dataType: "html",
+            success: function (data) {
+                $('#table').empty();
+                $('#table').html(data);
+                activeVoiceMenu(Id_TreeElement);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $('#table').html('<div class="page-content"><p class="alert alert-danger">Si è verificato un errore:' + xhr.responseText + '</p></div>');
+            },
+            complete: function () {
+                StopLoading();
+            }
+        });
+        return false;
+    }
+    function VaiAlDettaglio(id, isInjected) {
+        $('#breadcrumbsHome').hide();
+        StartLoading("Attendere...");
+        var Id_TreeElement = id;
+        var searchParam = new Object();
+        searchParam.Id_TreeElement = Id_TreeElement;
+        searchParam.IsInjected = isInjected;
+        jQuery.ajax({
+            async: true,
+            type: "POST",
+            url: '@Url.Action("Index", "Detail")',
+            data: searchParam,
+            dataType: "html",
+            success: function (data) {
+                $('#table').empty();
+                $('#table').html(data);
+                $("#dvLoading").hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $('#table').html('<div class="page-content"><p class="alert alert-danger">Si è verificato un errore:' + xhr.responseText + '</p></div>');
+            },
+            complete: function () {
+                StopLoading();
+            }
+        });
+        return false;
+    }
+    function OpenListaAmbiti(id) {
+        $('#breadcrumbsHome').show();
+        var searchParam = new Object();
+        searchParam.idTreeElement = id;
+        StartLoading("Attendere...");
+        jQuery.ajax({
+            type: "POST",
+            url: '@Url.Action("ListaAmbiti", "Ambiti")',
+            data: searchParam,
+            dataType: "html",
+            success: function (data) {
+                $('#table').html('<div class="page-content">' + data + '</div>');
+                activeVoiceMenu(0);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $('#table').html('<div class="page-content"><p class="alert alert-danger">Si è verificato un errore:' + xhr.responseText + '</p></div>');
+            },
+            complete: function () {
+                StopLoading();
+            }
+        });
+        return false;
+    }
+
+    function OpenProcessiTable(Id_TreeElement, TreeElementType, isInjected) {
+        $('#breadcrumbsHome').hide();
+        var searchParam = new Object();
+        searchParam.Id_TreeElement = Id_TreeElement;
+        searchParam.TreeElementType = TreeElementType;
+        searchParam.IsInjected = isInjected;
+        StartLoading("Attendere...");
+        jQuery.ajax({
+            type: "POST",
+            url: '@Url.Action("NavigationTable", "TreeElements")',
+            data: searchParam,
+            dataType: "html",
+            success: function (data) {
+                $('#table').empty();
+                $('#table').html(data);
+                activeVoiceMenu(Id_TreeElement);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                StopLoading();
+                $('#table').html('<div class="page-content"><p class="alert alert-danger">Si è verificato un errore:' + xhr.responseText + '</p></div>');
+            },
+            complete: function () {
+                StopLoading();
+            }
+        });
+        return false;
+    }
+    function StartLoading(msg) {
+        $("#fullcontainer").mask(msg);
+    }
+    function StopLoading() {
+        $("#fullcontainer").unmask();
+    }
+</script>

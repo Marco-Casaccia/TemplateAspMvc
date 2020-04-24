@@ -1,0 +1,124 @@
+﻿@model Web.Models.MUSEI.MuseiVM
+@{
+    /**/
+
+    ViewBag.Title = "Amministrazione musei";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div id="table" style="padding-left: 1px;">
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                Amministrazione dei Musei
+            </h1>
+        </div>
+
+
+        @RenderPage("Museo/_insmuseo.cshtml")
+
+
+
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable">
+                <div class="widget-box ui-sortable-handle">
+                    <div class="widget-header widget-header-small">
+                        <h4 class="widget-title">Ricerca Musei</h4>
+                        <div class="widget-toolbar">
+                            <a onclick="CollapseWdg('wdgsearchMuseoBody')">
+                                <i name="wdgsearchMuseoBody" class='ace-icon fa fa-chevron-down '></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="widget-body collapse" id="wdgsearchMuseoBody">
+
+                        @RenderPage("Museo/searchMuseo.cshtml")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <hr />
+        </div>
+        <div id="musei_table">
+            @*@RenderPage("Museo/_listMusei.cshtml")*@
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+
+    $(function () {
+
+        $('.date-picker').datepicker().next().on(ace.click_event, function () {
+            $(this).prev().focus();
+        });
+
+    });
+
+    function DeleteMuseo(id) {
+
+           
+
+        jQuery.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteMuseo", "Museo")',
+            data: {
+                idmuseo: id
+            },
+            dataType: "text",
+            success: function (data) {
+                 
+                $('#musei_table').html(data);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                
+                $('#musei_table').html('<div class="page-content"><p class="alert alert-danger">Si è verificato un errore:' + xhr.responseText + '</p></div>');
+            }
+        });
+    }
+    function P_AvviaRicerca() {
+
+        $('#footer').hide();
+        $('#np_results_table').html('');
+        var searchParam = new Object();
+
+        searchParam.IdMacroArea = $('#id_zona').val();
+        searchParam.DataDa = $('#datada').val();
+        searchParam.DataAl = $('#dataal').val();
+        
+        jQuery.ajax({
+            type: "POST",
+            url: '@Url.Action("FiltroMusei", "Admin")',
+            data: searchParam,
+            dataType: "text",
+            success: function (data) {
+                 
+                $('#musei_table').html(data);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+               
+                $('#musei_table').html('<div class="page-content"><p class="alert alert-danger">Si è verificato un errore:' + xhr.responseText + '</p></div>');
+            }
+        });
+    }
+
+</script>
+
+

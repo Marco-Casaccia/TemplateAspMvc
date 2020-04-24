@@ -1,0 +1,106 @@
+﻿@model Web.Models.MUSEI.MuseiVM
+@{
+
+    ViewBag.Title = "Lista Musei";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+
+@*@RenderPage("searchMuseo.cshtml")*@
+<div class="row-fluid" id="musei_table">
+
+    @*@RenderPage("_listMusei.cshtml")*@
+
+</div>
+<br />
+<br />
+<br />
+<div class="wdg_error">
+</div>
+
+<!-- PAGE CONTENT ENDS -->
+<!-- basic scripts -->
+<!--[if !IE]> -->
+<script src="~/Content/js/jquery.2.1.1.min.js"></script>
+<!-- <![endif]-->
+<!--[if IE]>
+<script src="~/Content/js/jquery.1.11.1.min.js"></script>
+<![endif]-->
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='~/Content/js/jquery.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='~/Content/js/jquery1x.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='~/Content/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+<script src="~/Content/js/bootstrap.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="~/Content/js/jquery.nestable.min.js"></script>
+
+<!-- ace scripts -->
+<script src="~/Content/js/ace-elements.min.js"></script>
+<script src="~/Content/js/ace.min.js"></script>
+
+<script type="text/javascript">
+
+   
+
+    $(function () {
+
+        $('.date-picker').datepicker().next().on(ace.click_event, function () {
+            $(this).prev().focus();
+        });
+
+    });
+
+    function P_AvviaRicerca() {
+        
+        $('#footer').hide();
+        $('#np_results_table').html('');
+        var searchParam = new Object();
+        
+        searchParam.IdMacroArea = $('#id_zona').val();
+        searchParam.DataDa = $('#datada').val();
+        searchParam.DataAl = $('#dataal').val();
+       
+         
+       
+
+        $('#fullcontainer').mask('Ricerca in corso...');
+
+        jQuery.ajax({
+            type: "POST",
+            url: '@Url.Action("FiltroMusei", "Museo")',
+            data: searchParam,
+            dataType: "text",
+            success: function (data) {
+                $("#fullcontainer").unmask();
+
+                $('#musei_table').html(data);
+             
+               
+                
+               
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("#fullcontainer").unmask();
+                $('#musei_table').html('<div class="page-content"><p class="alert alert-danger">Si è verificato un errore:' + xhr.responseText + '</p></div>');
+            }
+        });
+    }
+        $(document).ready(function () {
+           
+            P_AvviaRicerca();
+           
+           
+             
+    });
+</script>

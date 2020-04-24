@@ -1,0 +1,150 @@
+﻿
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable">
+        <div class="widget-box ui-sortable-handle">
+            <div class="widget-header widget-header-small">
+                <h4 class="widget-title">Inserimento Museo</h4>
+                <div class="widget-toolbar">
+                    <a onclick="CollapseWdg('wdgReferentiBody')">
+                        <i name="wdgReferentiBody" class='ace-icon fa fa-chevron-down '></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="widget-body collapse" id="wdgReferentiBody">
+
+                <div class='widget-main'>
+                    <form class="form-horizontal" role="form">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div class="control-group">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label no-padding-right">Zona</label>
+                                <div class="col-sm-9">
+
+                                    <select id="selectmacroareaAdd" name="selectmacroareaAdd">
+                                        @if (Model != null)
+                                        {
+                                        foreach (var item in Model.ListaMacroAree)
+                                        {
+                                        <option value="@item.id">@item.zona</option>
+                                        }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br />
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label no-padding-right">Nome</label>
+                                <div class="col-sm-10">
+                                    <input id="NomeAdd" placeholder="Nome" class="form-control tt-input col-lg-12 col-sm-12" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label no-padding-right">Descrizione</label>
+                                <div class="col-sm-10">
+                                    <input id="DescrizioneAdd" placeholder="Descrizione" class="form-control tt-input col-lg-12 col-sm-12" />
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="hr"></div>
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+
+                                <button class="btn btn-info" type="button" onclick="SaveNewMuseo();">
+                                    <i class="ace-icon fa fa-search bigger-110"></i>
+                                    Add
+                                </button>
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+
+
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+</div>
+<script type="text/javascript">
+
+    function SaveNewMuseo() {
+
+        var strErrors = "";
+
+        if ($('#NomeAdd').val() == '') {
+            strErrors += " - Il campo \'\'nome\'\' è obbligatorio.\n";
+        }
+
+        if ($('#DescrizioneAdd').val() == '') {
+            strErrors += " - Il campo \'\'descrizione\'\' è obbligatorio.\n";
+        }
+
+        if (strErrors != "") {
+            alert(strErrors);
+            $('#musei_table').html('');
+            return false;
+        }
+        else {
+            SaveMuseo();
+        }
+    }
+
+    function SaveMuseo() {
+       
+        var museo = new Object();
+
+        museo.nome = $('#NomeAdd').val();;
+        museo.descrizione = $('#DescrizioneAdd').val();
+        museo.id_macroaree = $('#selectmacroareaAdd').val();
+
+
+        //$('#fullcontainer').mask('Creazione in corso...');
+        
+        jQuery.ajax({
+            type: "POST",
+            url: '@Url.Action("NewMuseo", "Admin")',
+            data: museo,
+            dataType: "text",
+            success: function (data) {
+                alert("Salvataggio effettuato");
+                //$("#fullcontainer").unmask();
+
+                $('#NomeAdd').val('');
+                $('#DescrizioneAdd').val('');
+
+                $('#selectmacroareaAdd option:selected').prop('selected', false);
+              
+                $('#musei_table').html('');
+                $('#musei_table').html(data);
+                
+               
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //$("#fullcontainer").unmask();
+
+                $("#musei_table").append('<div id="detailNode">Errore</div>');
+            }
+
+
+        });
+    }
+
+
+</script>

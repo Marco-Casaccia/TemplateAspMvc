@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class='widget-container-col ui-sortable col-xs-5 col-sm-5 col-lg-5' id="wdgGestioni">
+            <div class='widget-box widget-color-blue2 ui-sortable-handle'>
+                <div class='widget-header widget-header-small'>
+                    <h5 class='widget-title'>Gestioni Musei</h5>
+                    <div class='widget-toolbar'>
+                        <a href='#' onclick="CollapseWdg('wdgGestioniMuseiBody')">
+                            <i name="wdgGestioniBody" class='ace-icon fa fa-chevron-down white'></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body" id="wdgGestioniDocumentiBody">
+                    <div class='widget-main'>
+                        <div class='row'>
+                            <div class="form-group" id="listaGestioni">
+
+                                <div class="col-sm-12">
+                                    <p>Permette la gestione dei musei</p>
+                                    <a href="@Url.Action("MuseiIndex", "Admin")" id='1195' class='btn btn-block btn-primary' data-widget='collapse'>Gestisci Musei</a>
+                                    <a href="@Url.Action("MuseoAdd", "Admin")" id='1195' class='btn btn-block btn-primary' data-widget='collapse'>Crea nuovo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</section>

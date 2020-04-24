@@ -1,0 +1,132 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="it" id="fullcontainer">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="UTF-8" />
+    <title> </title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/font-awesome/4.2.0/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="~/Content/fonts/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="~/Content/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link href="~/Content/css/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="~/Content/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <!--[if lte IE 9]>
+
+      <link rel="stylesheet" href="~/Content/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="~/Content/js/ace-extra.min.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="~/Content/js/html5shiv.min.js"></script>
+    <script src="~/Content/js/respond.min.js"></script>
+    <![endif]-->
+
+    @*Font custom*@
+    <link rel="stylesheet" href="~/Content/fonts/custom/css/customfontstyle.css" />
+    <link rel="stylesheet" href="~/Content/fonts/custom/css/fontcustom.css" />
+    <link rel="stylesheet" href="~/Content/fonts/custom/js/fontcustom.js" />
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script src="~/Content/js/jquery.2.1.1.min.js"></script>
+
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="~/Content/js/jquery.1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='~/Content/js/jquery.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">
+     window.jQuery || document.write("<script src='~/Content/js/jquery1x.min.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='~/Content/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+</head>
+
+<body class="no-skin" id="fullframe" style="overflow-x: hidden;">
+    <div id="navbar" class="navbar navbar-default" style="background:#0066cc">
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="@Url.Action("Index","Home")" class="navbar-brand">
+                    <small>
+                          @*<img src="~/Content/logo.png" alt="" title="" />*@
+                        Template MVC
+                    </small>
+                </a>
+            </div>
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+              
+                    <ul id="barrawidgets" class="nav ace-nav pull-right">
+                        <li class="grey" id="adminVoice">
+                            <a href="@Url.Action("Index", "Admin")" title="Accedi all'amministrazione'">
+                                <i class="ace-icon fa fa-cog bigger-150"></i>
+                            </a>
+                        </li>
+                    </ul>
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+    
+        <div class="main-content">
+            <div class="main-content-inner">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="footer">
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+    </div><!-- /.main-container -->
+    <script src="~/Content/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="~/Content/js/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="~/Content/js/jquery-ui.custom.min.js"></script>
+    <script src="~/Content/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="~/Content/js/jquery.easypiechart.min.js"></script>
+    <script src="~/Content/js/jquery.sparkline.min.js"></script>
+    <script src="~/Content/js/jquery.flot.min.js"></script>
+    <script src="~/Content/js/jquery.flot.pie.min.js"></script>
+    <script src="~/Content/js/jquery.flot.resize.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Content/js/jquery.loadmask.min.js"></script>
+
+    <!-- ace scripts -->
+    <script src="~/Content/js/ace-elements.min.js"></script>
+    <script src="~/Content/js/ace.min.js"></script>
+
+    @RenderPage("_jquery.cshtml")
+
+</body>
+</html>

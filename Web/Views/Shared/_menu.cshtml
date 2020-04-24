@@ -1,0 +1,209 @@
+﻿ 
+
+<ul class="nav nav-list" id="demo3">
+
+
+    <li class="">
+        <a href="@(Url.Action("Index", "Home"))">
+            <i class="menu-icon fa fa-home"></i>
+            <span class="menu-text"> Home </span>
+        </a>
+    </li>
+
+    <li class="">
+        <a href="@(Url.Action("Index", "Home"))">
+            <i class="menu-icon fa fa-home"></i>
+            <span class="menu-text"> Informazioni </span>
+        </a>
+    </li>
+
+
+    <li class="">
+        <a href="@(Url.Action("Index", "Home"))">
+            <i class="menu-icon fa fa-home"></i>
+            <span class="menu-text"> Galleria </span>
+        </a>
+    </li>
+
+
+    <li class="">
+        <a href="@(Url.Action("Index", "Home"))">
+            <i class="menu-icon fa fa-home"></i>
+            <span class="menu-text"> Eventi </span>
+        </a>
+    </li>
+
+
+    <li class="">
+        <a href="@(Url.Action("Index", "Home"))">
+            <i class="menu-icon fa fa-home"></i>
+            <span class="menu-text"> Ticket </span>
+        </a>
+    </li>
+
+    <li class="">
+        <a href="@(Url.Action("Index", "Home"))">
+            <i class="menu-icon fa fa-home"></i>
+            <span class="menu-text"> Mappa Musei </span>
+        </a>
+    </li>
+
+
+
+    <li class="">
+        <a class="dropdown-toggle" title="Espandi Liste">
+            <i class="menu-icon fa fa-folder-open" id="IdDettaglioAmbito" onclick="OpenListaAmbiti()" style="cursor:pointer"></i>
+            <span class="menu-text">
+                Liste
+            </span>
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+        <b class="arrow"></b>
+
+        <ul class="submenu nav-hide">
+            <li class="" id="id_3">
+
+                <a href="@(Url.Action("Index", "Museo"))" class="" style="">
+                    <table border="0" cellspacing="10" cellpadding="0" width="100%">
+                        <tbody>
+                            <tr>
+                                @*<i class="menu-icon fa icon-programming-process blue" id="IdDettaglio" onclick="VaiAlDettaglio(3, 'False')" value="3" title="Vai al dettaglio di Telematizzazione">*@
+                                <td align="left">
+
+                                    <span class="menu-text">
+
+                                        <i class="menu-icon fa fa-list-alt blue" title="Vai alle fasi" idfase="3" nomefase="Telematizzazione">
+                                        </i>
+                                        @*<i class="fa fa-cogs" id="IdServizio" onclick="OpenProcessiTable(3,7,'False')" title="Vai alle applicazioni"></i>*@
+                                        Lista Musei
+                                    </span>
+
+                                </td>
+                                @*</i>*@
+                                <td valign="top" style="padding-right:5px">
+                                    <b class=""></b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </a>
+                <ul class="submenu nav-hide"></ul>
+
+            </li>
+            <li class="" id="id_4">
+
+                <a href="@(Url.Action("Index", "Home"))" class="dropdown-toggle" style="">
+                    <table border="0" cellspacing="10" cellpadding="0" width="100%">
+                        <tbody>
+                            <tr>
+                                <td align="left">
+                                    <span class="menu-text">
+                                        <i class="menu-icon fa icon-programming-process blue" id="IdDettaglio" value="11" title="Vai al dettaglio di Gestione della domanda"></i>
+                                        @*<i class="fa fa-cogs" id="IdServizio" onclick="OpenProcessiTable(11,7,'False')" title="Vai alle applicazioni"></i>*@
+                                        Lista Opere
+                                    </span>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </a>
+
+
+            </li>
+        </ul>
+
+    </li>
+
+
+    <li class="">
+        <a href="@(Url.Action("Index", "Home"))">
+            <i class="menu-icon fa fa-home"></i>
+            <span class="menu-text"> Contatti </span>
+        </a>
+    </li>
+
+    @*<li class="">
+            <a href="@(Url.Action("Index", "Home"))">
+                <i class="menu-icon fa fa-home"></i>
+                <span class="menu-text"> Altro </span>
+            </a>
+        </li>*@
+
+
+
+
+
+
+    <li class="">
+        <a class="dropdown-toggle" title="Espandi ambiti">
+            <i class="menu-icon fa fa-folder-open" id="IdDettaglioAmbito" onclick="OpenListaAmbiti()" style="cursor:pointer"></i>
+            <span class="menu-text">
+                Altro
+            </span>
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+        <b class="arrow"></b>
+
+        <ul class="submenu nav-hide">
+            <li class="" id="id_5">
+
+                <a href="@(Url.Action("Index", "Home"))" class="" style="">
+                    <table border="0" cellspacing="10" cellpadding="0" width="100%">
+                        <tbody>
+                            <tr>
+                                @*<i class="menu-icon fa icon-programming-process blue" id="IdDettaglio" onclick="VaiAlDettaglio(3, 'False')" value="3" title="Vai al dettaglio di Telematizzazione">*@
+                                <td align="left">
+
+                                    <span class="menu-text">
+
+                                        <i class="menu-icon fa fa-list-alt blue" title="Vai alle fasi" idfase="3" nomefase="Telematizzazione">
+                                        </i>
+                                        @*<i class="fa fa-cogs" id="IdServizio" onclick="OpenProcessiTable(3,7,'False')" title="Vai alle applicazioni"></i>*@
+                                        Login
+                                    </span>
+
+                                </td>
+                                @*</i>*@
+                                <td valign="top" style="padding-right:5px">
+                                    <b class=""></b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </a>
+                <ul class="submenu nav-hide"></ul>
+
+            </li>
+            <li class="" id="id_6">
+
+                <a href="@(Url.Action("Index", "Home"))" class="dropdown-toggle" style="">
+                    <table border="0" cellspacing="10" cellpadding="0" width="100%">
+                        <tbody>
+                            <tr>
+                                <td align="left">
+                                    <span class="menu-text">
+                                        <i class="menu-icon fa icon-programming-process blue" id="IdDettaglio" value="11" title="Vai al dettaglio di Gestione della domanda"></i>
+                                        @*<i class="fa fa-cogs" id="IdServizio" onclick="OpenProcessiTable(11,7,'False')" title="Vai alle applicazioni"></i>*@
+                                        Registrazione
+                                    </span>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </a>
+
+
+            </li>
+        </ul>
+
+    </li>
+
+    
+
+</ul>
+
+
+
+ 

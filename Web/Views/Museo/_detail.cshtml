@@ -1,0 +1,147 @@
+﻿@model Web.Models.MUSEI.MuseiVM
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var selectedMuseo = Model.SelectedMuseo;
+}
+
+<input type="hidden" id="idMuseo" name="idMuseo" value="@selectedMuseo.Id">
+<div id="table" style="padding-left: 1px;">
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                Dettaglio Museo @Model.SelectedMuseo.nome
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable">
+                <form class="form-horizontal">
+                    @*<div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Nome </label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@selectedMuseo.nome  </label>
+                            </div>
+                        </div>*@
+
+                    <div class="form-group">
+                        <label for="form-field-1" class="col-sm-2 control-label"> Nome: </label>
+
+                        <div class="col-sm-9 ">
+                            <input type="text" class="col-xs-10 col-sm-5" placeholder="Nome" id="nome" name="nome" value="@selectedMuseo.nome">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Descrizione</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="descrizione" name="descrizione" placeholder="Descrizione" value="@selectedMuseo.descrizione">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-field-1-1" class="col-sm-2 control-label"> Zona: </label>
+
+                        <div class="col-sm-9">
+                            <select id="selectmacroarea" name="selectmacroarea">
+
+                                @if (Model != null)
+                                {
+                                    foreach (var item in Model.ListaMacroAree)
+                                    {
+
+                                        @*<option value="@item." @if (item.id == Model.SelectedMuseo.id_macroaree) { <text> selected="selected" </text> }>@item.zona</option>*@
+
+                                        <option value="@item.id">@item.zona</option>
+                                    }
+                                }
+
+                                @*@if (Model != null)
+        {
+            foreach (var item in Model.ListaMacroAree)
+            {
+
+                <option value="@item." @if (item.Id_Tipologia == Model.Document.Id_Tipologia_Documenti) { <text> selected="selected" </text> }>@item.Descrizione</option>
+            }
+        }*@
+                            </select>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Stato utenza</label>
+                            <div class="col-sm-1">
+                                <select id="statoUtenza" class="form-control">
+                                    @if (selectedMuseo.Disabled)
+                                    {
+                                        <option value="false">Abilitato</option>
+                                        <option value="true" selected="selected">Disabilitato</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="false" selected="selected">Abilitato</option>
+                                        <option value="true">Disabilitato</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>*@
+                    @*<div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Funzioni associate</label>
+                            <div class="col-sm-10">
+                                <select multiple="" class="form-control">
+                                    <option>Consultatore</option>
+                                    <option>Editore</option>
+                                    <option>Amministratore</option>
+                                </select>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-success" onclick="SaveMuseoDetail();">Salva modifiche</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+     
+    function SaveMuseoDetail() {
+
+
+
+        StartLoading("Salvataggio in corso...");
+
+
+        var museo = new Object();
+
+
+        museo.nome = $('#nome').val();;
+        museo.descrizione = $('#descrizione').val();
+
+        museo.id_macroaree = $('#selectmacroarea option:selected').val();
+       
+        museo.id = $('#idMuseo').val();
+
+
+        jQuery.ajax({
+            type: "POST",
+            url: '@Url.Action("SaveMuseo", "Museo")',
+            data: museo,
+            dataType: "html",
+            success: function (data) {
+              
+                StartLoading("Salvataggio effettuato");
+                window.location.href = '@Url.Action("MuseiIndex", "Admin")';
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                StopLoading();
+                alert("Errore durante il salvataggio" + xhr.responseText);
+            },
+            complete: function () {
+                StopLoading();
+            }
+        });
+    }
+</script>
